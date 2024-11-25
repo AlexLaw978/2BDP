@@ -28,7 +28,11 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 1. Download R script (2bdp.R) from GitHub
 2. Use source("../path to scrip/..") in script that will use 2bdp algorithm
 
-## How to Run
+## 2BDP Operation FlowChart
+
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/2bdpFlowChart.png)
+
+## How to Use
 
 1. create a 2BDPClass object using the create2BDPClass Function
 2. pass the 2BDP object into run2BDP() function and wait to it to finish
@@ -57,18 +61,25 @@ Variable | Description
 *Optional* totalPanels|This value determines how many times random forest should be run to achieve the requested amount of panels. Default = 2000 (>1).
 *Optional* topPanels|This value determines how many panels should be kept after frequency mapping for validation processing. Default 200 (>1). 
 *Optional* trainSplitRatio|The ratio used to determine what samples are to be placed in the training set. Left over samples are defaulted to validation set. Default = 0.7 (0-1).
-*Optional* rfDataSize|Can be a float or int. Value is used to determine how many features are used when running random forest. If between 0-1, then the value will be multiplied to the total length of features. If value is >1 then that exact amount of features will be used. Recommend to keep 2x above the minimal panel size. Default = .5 (0-1, or 1>)
+*Optional* rfDataSize|Can be a float or int. Value is used to determine how many features are used when running random forest. If between 0-1, then the value will be multiplied to the total length of features. If value is >1 then that exact amount of features will be used. Recommend to keep 2x above the minimal panel size. Default = .5 (0-1, or 1>).
 *Optional* amountOfFeatures|a vector of numbers for the size that panels should be. Ex: 2:10 will analyize panels between 2 - 10 features. Default = 2:10 (0<x<ncol(data)). 
 *Optional* subGrouping|After the frequency mapping, features in each panel are divided into subpanels. Currently 2 options are available for this: "all" or "sw". All will produce every combination of subpanels for every size provided by the amountOfFeatures vector. "sw" performs a sliding window operation over the full panels. Default = all.
 *Optional* metric|Currently program only operates with the Accuracy metric. This variable is only used in randomForest generation. May be expanded to other metrics after research and testing. Default = Accuracy (Only "Accuracy").
 *Optional* tuneGrid|Object used in randomForest and Caret operations. Can use your own custom object or leave null for a basic default use. Default=NULL.
 *Optional* tuneGridParms|The value used for .mtry when creating a tuneGrid object. Default = 2:20.
 *Optional* trainControl|Object used in randomForest and Caret operations. Can use your own custom object or leave null for a basic default use. Default=NULL.
-*Optional* trainControlParms|a named vector (method, repeats, savePredictions) that will be used to create the default trainControlObject for caret and randomForest. Default =c(method="repeatedcv",repeats=5,savePredictions = "all")
+*Optional* trainControlParms|a named vector (method, repeats, savePredictions) that will be used to create the default trainControlObject for caret and randomForest. Default =c(method="repeatedcv",repeats=5,savePredictions = "all").
 *Optional* AUC|The AUC cutoff to identify significant panels whose value exceeds that cutoff. Default = 0.8 (0-1).
 *Optional* pValue|The p value cutoff to identify significant panels whose value is below that cutoff. Default = .05 (0-1).
 
+## Running 2BDP
 
+run:
+```
+bdpObject <- create2BDPClass(...) #fill with required data
+run2BDP(bdpObject,batch=1)
+```
 
+The batch variable is used to calculate how many panels should be processed in parallel before breaking to be saved. This variable is multiplied against threads and used in parLapply() function. If value >1, then some tasks will be put on standby until a thread becomes available. 
 
 
