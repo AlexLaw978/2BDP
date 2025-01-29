@@ -48,7 +48,7 @@ Variable | Description
 ------------- | -------------
 *Required* data|Dataframe object with samples are row names & genes for column names. Default = NULL.
 *Required* metadata|Dataframe with samples and the binomial decision point. Sample names must exist in their own column, and match the row order of the data's data frame.  Default = NULL. 
-*Required* dbp|The String within the metadata data frame column that will be used for analysis. Only 2 unique factors can exist for this. Default = NULL.
+*Required* bdp|The String within the metadata data frame column that will be used for analysis. Only 2 unique factors can exist for this. Default = NULL.
 *Required* poi|The String within the dbp column is used as the point of interest when using the algorithm. The default value is NULL.
 *Required* sampleIDS|Column name (String) in the metadata data frame that contains the sample IDs. Default = NULL.
 *Optional* fileBasename|A string or path to a file without the file extension is required. If provided, each major step will be saved to an excel file, otherwise, all data will only exist with the 2BDP class object in R. Note if the same file is used multiple times there is a chance for some of the save data to be lost during the overwrite process (Looking into cause). Default = NULL.
