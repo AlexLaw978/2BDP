@@ -95,6 +95,7 @@ Major Development Goals
 	- [ ] Implement method to retrieve R objects without rerunning whole program.
 - [ ] Fix file data loss when overwriting existing excel file at checkpoints.
 - [ ] Format program into R package.
+
 Minor Development Goals
 - [ ] Dynamic or static options for seeds.
 - [ ] Dynamic or static options for analysis on split data.
