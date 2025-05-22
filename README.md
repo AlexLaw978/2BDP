@@ -26,11 +26,11 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 
 ## Installation
 1. Download R script (2bdp.R) from GitHub
-2. Use source("../path to scrip/..") in script that will use 2bdp algorithm
+2. Use source("path to script") in script that will use 2bdp algorithm
 
 ## 2BDP Operation FlowChart
 
-![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/2bdpFlowChart.png)
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/2bdpFlowChart.png)
 
 ## How to Use
 
