@@ -34,8 +34,23 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 
 ## How to Use
 
-1. create a 2BDPClass object using the create2BDPClass Function
-2. pass the 2BDP object into run2BDP() function and wait to it to finish
+1. Setup data table (df) <br />
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
+	- Data should be normalized and cleaned before running create2BDPClass().
+	- All values need to be numeric.
+ 	- rownames = sample identifiers.
+  	- colnames = names of factors used to build the model (Ex: genes).
+2. Setup metadata table (md) <br />
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
+	- minimun of 2 columns, one for sample names and point of interest.
+ 	- sampleIDS = metadata column name containing all samples ("Sample").
+  		- Names need to be identicial and ordered the same as the rownames within the data table.
+	- bdp = metadata column name you want to test factors against ("poi1").
+ 	- poi = Value of interest within the bdp column that is being investigated ("T").
+3. create 2bdpObject<br />
+bdpObject=create2BDPClass(data = df,metadata = md,sampleIDS = "Sample",bdp="poi1",poi="T")
+4. run 2bdp<br />
+bdpObject=run2BDP(bdpObject)
 
 Note: Subfunctions of run2BDP check the status of the class to allow it to restart at major checkpoints.
 Run time can be extremely long depending on the values
@@ -72,30 +87,12 @@ Variable | Description
 *Optional* AUC|The AUC cutoff to identify significant panels whose value exceeds that cutoff.<br /> Default=0.8 (0-1).
 *Optional* pValue|The p value cutoff to identify significant panels whose value is below that cutoff.<br /> Default=.05 (0-1).
 
-## Setup Guide
-1. Setup data table (df) <br />
-![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
-	- Data should be normalized and cleaned before running create2BDPClass().
-	- All values need to be numeric.
- 	- rownames = sample identifiers.
-  	- colnames = names of factors used to build the model (Ex: genes).
-2. Setup metadata table (md) <br />
-![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
-	- minimun of 2 columns, one for sample names and point of interest.
- 	- sampleIDS = metadata column name containing all samples ("Sample").
-  		- Names need to be identicial and ordered the same as the rownames within the data table.
-	- bdp = metadata column name you want to test factors against ("poi1").
- 	- poi = Value of interest within the bdp column that is being investigated ("T").
-3. create 2bdpObject<br />
-bdpObject=create2BDPClass(data = df,metadata = md,sampleIDS = "Sample",bdp="poi1",poi="T")
-4. run 2bdp<br />
-bdpObject=run2BDP(bdpObject)
-
-
 ## Developer Note
 2BDP core algorithms are complete, however optimizations for program, parallel, and deployment architecture is still underway. <br />
 Key development steps
 - [ ] Dynamic or static options for seeds
 - [ ] Dynamic or static options for analysis on split data
 - [ ] Improve/Redesign parallel architecture to allow serial and parallel operations obtain the same results
-- [ ] Implement method to retrieve R objects without rerunning whole program 
+- [ ] Implement method to extract model objects for graphing purposes
+	- [ ] Implement method to retrieve R objects without rerunning whole program
+- [ ] Fix file data loss when overwriting existing excel file at checkpoints
