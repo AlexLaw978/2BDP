@@ -22,7 +22,7 @@ require(ResourceSelection)
 require(parallel)
 require(ggplot2)
 ```
-Note: It was developed on Windows OS with parallel features working on Windows. Parallel operations were untested on Linux-based systems.
+Note: It was developed on Windows OS with parallel features working on Windows. Never tested on Linux-based systems.
 
 ## Installation
 1. Download R script (2bdp.R) from GitHub
@@ -44,28 +44,30 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
 	- minimun of 2 columns, one for sample names and point of interest.
  	- sampleIDS = metadata column name containing all samples ("Sample").
-  		- Names need to be identicial and ordered the same as the rownames within the data table.
-	- bdp = metadata column name you want to test factors against ("poi1").
- 	- poi = Value of interest within the bdp column that is being investigated ("T").
-3. create 2bdpObject<br />
+  		- Names need to be identicial and ordered the same way as the rownames within the data table.
+	- bdp = metadata column name that contains the 2 factor data ("poi1").
+ 	- poi = Value of interest within the bdp column that is being investigated ("T"). Factors can be named anything but only 2 can exist.
+3. Source Script<br />
+source(".../2bdp.R")
+4. Create 2bdpObject<br />
 bdpObject=create2BDPClass(data = df,metadata = md,sampleIDS = "Sample",bdp="poi1",poi="T")
-4. run 2bdp<br />
+5. Run 2bdp<br />
 bdpObject=run2BDP(bdpObject)
 
 Note: Subfunctions of run2BDP check the status of the class to allow it to restart at major checkpoints.
 Run time can be extremely long depending on the values
 
 ## Options For 2BDP Class
-The class is made up of several required variables which will be used to operate the 
-The following table describes each variable that should be inputted. Recommend values are placed where applicable and have been tested.
+The class is made up of several required and optional parameters which will be used to operate the algorithm.<br />
+The following table describes each parameter where recommend values are placed where applicable and have been tested.
 
 Variable | Description
 ------------- | -------------
-*Required* data|Dataframe object where samples are rows & genes for columns.<br /> Default = NULL.
-*Required* metadata|Dataframe with samples and the binomial decision point. Sample names must exist in their own column, and match the row order of the data's data frame.<br /> Default=NULL. 
+*Required* data|Dataframe object where samples are rows & factors are columns.<br /> Default=NULL.
+*Required* metadata|Dataframe with samples and the binomial decision point. Sample names must exist in their own column, and match the row order of the data frame.<br /> Default=NULL. 
 *Required* bdp|The String within the metadata data frame column that will be used for analysis. Only 2 unique factors can exist for this.<br /> Default=NULL.
-*Required* poi|The String within the dbp column is used as the point of interest when using the algorithm.<br /> Default=NULL.
-*Required* sampleIDS|Column name (String) in the metadata data frame that contains the sample IDs.<br /> Default=NULL.
+*Required* poi|The String within dbp column that is used as the point of interest.<br /> Default=NULL.
+*Required* sampleIDS|Column name in the metadata data frame that contains the sample IDs.<br /> Default=NULL.
 *Optional* fileBasename|A string or path to a file without the file extension is required. If provided, each major step will be saved to an excel file, otherwise, all data will only exist with the 2BDP class object in R. Note if the same file is used multiple times there is a chance for some of the save data to be lost during the overwrite process (Looking into cause).<br /> Default=NULL.
 *Optional* featuresNameMap|The following regex "^[A-Za-z0-9]+$" determines if feature names are valid. If feature names are not valid, a reference map (data frame) between default ids and feature names will be made, even if you provide your own map.<br /> Default=NULL.
 *Optional* ifFeatureMap| boolean to use the featureMap function. If set to false and invalid characters are present then object will not be created and you will be required to rename features in data frame before proceeding.<br /> Default=T (T or F).
@@ -95,6 +97,7 @@ Variable | Description
 	- [ ] Implement method to retrieve R objects without rerunning whole program.
 - [ ] Fix file data loss when overwriting existing excel file at checkpoints.
 - [ ] Format program into R package.
+- [ ] Linux Testing
 
 ### Minor Development Goals
 - [ ] Dynamic or static options for seeds.
