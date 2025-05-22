@@ -40,13 +40,13 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 Note: Subfunctions of run2BDP check the status of the class to allow it to restart at major checkpoints.
 Run time can be extremely long depending on the values
 
-## Creating 2BDP Class
+## Options For 2BDP Class
 The class is made up of several required variables which will be used to operate the 
 The following table describes each variable that should be inputted. Recommend values are placed where applicable and have been tested.
 
 Variable | Description
 ------------- | -------------
-*Required* data|Dataframe object with samples are row names & genes for column names. Default = NULL.
+*Required* data|Dataframe object where samples are rows & genes for columns. Default = NULL.
 *Required* metadata|Dataframe with samples and the binomial decision point. Sample names must exist in their own column, and match the row order of the data's data frame.  Default = NULL. 
 *Required* bdp|The String within the metadata data frame column that will be used for analysis. Only 2 unique factors can exist for this. Default = NULL.
 *Required* poi|The String within the dbp column is used as the point of interest when using the algorithm. The default value is NULL.
@@ -71,6 +71,14 @@ Variable | Description
 *Optional* trainControlParms|a named vector (method, repeats, savePredictions) that will be used to create the default trainControlObject for caret and randomForest. Default =c(method="repeatedcv",repeats=5,savePredictions = "all").
 *Optional* AUC|The AUC cutoff to identify significant panels whose value exceeds that cutoff. Default = 0.8 (0-1).
 *Optional* pValue|The p value cutoff to identify significant panels whose value is below that cutoff. Default = .05 (0-1).
+
+## Setup Guide
+1. Setup data table
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
+  1. Data should be normalized and cleaned before use
+2. Get metadata table
+ ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
+
 
 ## Running 2BDP
 
