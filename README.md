@@ -96,3 +96,4 @@ Key development steps
 - [ ] Implement method to extract model objects for graphing purposes
 	- [ ] Implement method to retrieve R objects without rerunning whole program
 - [ ] Fix file data loss when overwriting existing excel file at checkpoints
+- [ ] Add functionality for analyzing multiple point of interests
