@@ -73,10 +73,10 @@ Variable | Description
 *Optional* pValue|The p value cutoff to identify significant panels whose value is below that cutoff. Default = .05 (0-1).
 
 ## Setup Guide
-1. Setup data table
+1. Setup data table <br />
 ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
-  1. Data should be normalized and cleaned before use
-2. Get metadata table
+	- 1. Data should be normalized and cleaned running create2BDPClass()
+2. Get metadata table <br />
  ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
 
 
