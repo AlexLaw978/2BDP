@@ -89,11 +89,13 @@ Variable | Description
 
 ## Developer Note
 2BDP core algorithms are complete, however optimizations for program, parallel, and deployment architecture is still underway. <br />
-Key development steps
-- [ ] Dynamic or static options for seeds
-- [ ] Dynamic or static options for analysis on split data
-- [ ] Improve/Redesign parallel architecture to allow serial and parallel operations obtain the same results
-- [ ] Implement method to extract model objects for graphing purposes
-	- [ ] Implement method to retrieve R objects without rerunning whole program
-- [ ] Fix file data loss when overwriting existing excel file at checkpoints
-- [ ] Add functionality for analyzing multiple point of interests
+Major Development Goals
+- [ ] Improve/Redesign parallel architecture to allow serial and parallel operations obtain the same results.
+- [ ] Implement method to extract model objects for graphing purposes.
+	- [ ] Implement method to retrieve R objects without rerunning whole program.
+- [ ] Fix file data loss when overwriting existing excel file at checkpoints.
+- [ ] Format program into R package.
+Minor Development Goals
+- [ ] Dynamic or static options for seeds.
+- [ ] Dynamic or static options for analysis on split data.
+- [ ] Add functionality for analyzing multiple point of interests.
