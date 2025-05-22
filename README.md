@@ -46,7 +46,7 @@ The following table describes each variable that should be inputted. Recommend v
 
 Variable | Description
 ------------- | -------------
-*Required* data|Dataframe object where samples are rows & genes for columns. Default = NULL.
+*Required* data|Dataframe object where samples are rows & genes for columns.<br /> Default = NULL.
 *Required* metadata|Dataframe with samples and the binomial decision point. Sample names must exist in their own column, and match the row order of the data's data frame.  Default = NULL. 
 *Required* bdp|The String within the metadata data frame column that will be used for analysis. Only 2 unique factors can exist for this. Default = NULL.
 *Required* poi|The String within the dbp column is used as the point of interest when using the algorithm. The default value is NULL.
@@ -65,20 +65,28 @@ Variable | Description
 *Optional* amountOfFeatures|a vector of numbers for the size that panels should be. Ex: 2:10 will analyize panels between 2 - 10 features. Default = 2:10 (0<x<ncol(data)). 
 *Optional* subGrouping|After the frequency mapping, features in each panel are divided into subpanels. Currently 2 options are available for this: "all" or "sw". All will produce every combination of subpanels for every size provided by the amountOfFeatures vector. "sw" performs a sliding window operation over the full panels. Default = all.
 *Optional* metric|Currently program only operates with the Accuracy metric. This variable is only used in randomForest generation. May be expanded to other metrics after research and testing. Default = Accuracy (Only "Accuracy").
-*Optional* tuneGrid|Object used in randomForest and Caret operations. Can use your own custom object or leave null for a basic default use. Default=NULL.
+*Optional* tuneGrid|Object used in randomForest and Caret operations. Can use your own custom object or leave null for a default use. Default=NULL.
 *Optional* tuneGridParms|The value used for .mtry when creating a tuneGrid object. Default = 2:20.
-*Optional* trainControl|Object used in randomForest and Caret operations. Can use your own custom object or leave null for a basic default use. Default=NULL.
-*Optional* trainControlParms|a named vector (method, repeats, savePredictions) that will be used to create the default trainControlObject for caret and randomForest. Default =c(method="repeatedcv",repeats=5,savePredictions = "all").
+*Optional* trainControl|Object used in randomForest and Caret operations. Can use your own custom object or leave null for default use. Default=NULL.
+*Optional* trainControlParms|a named vector (method, repeats, savePredictions) used to create the default trainControlObject for caret and randomForest. Default =c(method="repeatedcv",repeats=5,savePredictions = "all").
 *Optional* AUC|The AUC cutoff to identify significant panels whose value exceeds that cutoff. Default = 0.8 (0-1).
 *Optional* pValue|The p value cutoff to identify significant panels whose value is below that cutoff. Default = .05 (0-1).
 
 ## Setup Guide
 1. Setup data table <br />
 ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
-	- 1. Data should be normalized and cleaned running create2BDPClass()
+	- Data should be normalized and cleaned before running create2BDPClass().
+	- All values need to be numeric.
+ 	- rownames = sample identifiers.
+  	- colnames = names of factors used to build the model (Ex: genes).
 2. Get metadata table <br />
- ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
-
+![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/metadata.png)
+	- minimun of 2 columns, one for sample names and point of interest.
+ 	- sampleIDS = metadata column name containing all samples ("Sample" in this case).
+  		- Names need to be identicial and ordered the same as the rownames within the data table.
+	- bdp = metadata column name you want to test factors against ("poi1" for example).
+ 	- poi = Value of interest within the bdp column that is being investigated.
+3. create 2bdpObject
 
 ## Running 2BDP
 
@@ -90,4 +98,10 @@ run2BDP(bdpObject,batch=1)
 
 The batch variable is used to calculate how many panels should be processed in parallel before breaking to be saved. This variable is multiplied against threads and used in parLapply() function. If value >1, then some tasks will be put on standby until a thread becomes available. 
 
-
+## Developer Note
+2BDP core algorithms are complete, however optimizations for program, parallel, and deployment architecture is still underway. <br />
+Key development steps
+- [ ] Dynamic or static options for seeds
+- [ ] Dynamic or static options for analysis on split data
+- [ ] Improve/Redesign parallel architecture to allow serial and parallel operations obtain the same results
+- [ ] Implement method to retrieve R objects without rerunning whole program 
