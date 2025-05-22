@@ -97,7 +97,8 @@ Variable | Description
 	- [ ] Implement method to retrieve R objects without rerunning whole program.
 - [ ] Fix file data loss when overwriting existing excel file at checkpoints.
 - [ ] Format program into R package.
-- [ ] Linux Testing
+- [ ] Linux Testing.
+- [ ] Optimize for limited memory systems
 
 ### Minor Development Goals
 - [ ] Dynamic or static options for seeds.
