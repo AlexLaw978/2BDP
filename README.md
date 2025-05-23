@@ -61,7 +61,7 @@ A formal method is in development, but its possible to manually skip to validati
 1. Follow steps 1-4 in "How To Use" to generate 2bdp object
 2. Create vector for all models you want tested
 	- Ex: combinationVector=c("id1+id2+id3","id1+id3","..."+...)
- 	- The names (id1 etc) must exist within the columns of the data table in order to properly work
+ 	- The names used should be under bdpObject[["featureNameMap"]]$ids. If orginal names contain no illegal characters and the featureNameMap was never created then use the column names from the data table to generate the formulas.
 3. Assign combinationVector to biomarkerCombinations.<br />
 bdpObject$biomarkerCombinations=combinationVector
 4. Run the following functions as is.<br />
