@@ -28,11 +28,11 @@ Note: It was developed on Windows OS with parallel features working on Windows. 
 1. Download R script (2bdp.R) from GitHub
 2. Use source("path to script") in script that will use 2bdp algorithm
 
-## 2BDP Operation FlowChart
+## 2BDP Operation Flow Chart
 
 ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/2bdpFlowChart.png)
 
-## How to Use
+## How To Use
 
 1. Setup data table (df) <br />
 ![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/data.png)
@@ -53,6 +53,22 @@ source(".../2bdp.R")
 bdpObject=create2BDPClass(data = df,metadata = md,sampleIDS = "Sample",bdp="poi1",poi="T")
 5. Run 2bdp<br />
 bdpObject=run2BDP(bdpObject)
+6. Results are found under rsbmrValidation, kfcvValidation, bestKFOLD, bestRSMBR
+
+### Running Validation Only
+A formal method is in development, but its possible to manually skip to validation
+
+1. Follow steps 1-4 in "How To Use" to generate 2bdp object
+2. Create vector for all models you want tested
+	- Ex: combinationVector=c("id1+id2+id3","id1+id3","..."+...)
+ 	- The names (id1 etc) must exist within the columns of the data table in order to properly work
+3. Assign combinationVector to biomarkerCombinations.<br />
+bdpObject$biomarkerCombinations=combinationVector
+4. Run the following functions as is.<br />
+bdpObject=ParallelBiomarkerValidation(bdpObject)
+bdpObject=convertNames(bdpObject)
+bdpObject=trimByThreshold(bdpObject)
+5. Results are found under rsbmrValidation, kfcvValidation, bestKFOLD, bestRSMBR
 
 Note: Subfunctions of run2BDP check the status of the class to allow it to restart at major checkpoints.
 Run time can be extremely long depending on the values
@@ -92,7 +108,8 @@ Variable | Description
 ## Developer Note
 2BDP core algorithms are complete, however optimizations for program, parallel, and deployment architecture is still underway.
 ### Major Development Goals
-- [ ] Improve/Redesign parallel architecture to allow serial and parallel operations obtain the same results.
+- [ ] Improve/Redesign architecture to allow serial and parallel operations obtain the same results.
+- [ ] Create functions to skip sections of algorithm
 - [ ] Implement method to extract model objects for graphing purposes.
 	- [ ] Implement method to retrieve R objects without rerunning whole program.
 - [ ] Fix file data loss when overwriting existing excel file at checkpoints.
