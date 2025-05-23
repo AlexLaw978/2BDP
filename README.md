@@ -65,9 +65,9 @@ A formal method is in development, but its possible to manually skip to validati
 3. Assign combinationVector to biomarkerCombinations.<br />
 bdpObject$biomarkerCombinations=combinationVector
 4. Run the following functions as is.<br />
-bdpObject=ParallelBiomarkerValidation(bdpObject)
-bdpObject=convertNames(bdpObject)
-bdpObject=trimByThreshold(bdpObject)
+bdpObject=ParallelBiomarkerValidation(bdpObject)<br />
+bdpObject=convertNames(bdpObject)<br />
+bdpObject=trimByThreshold(bdpObject)<br />
 5. Results are found under rsbmrValidation, kfcvValidation, bestKFOLD, bestRSMBR
 
 Note: Subfunctions of run2BDP check the status of the class to allow it to restart at major checkpoints.
