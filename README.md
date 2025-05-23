@@ -121,3 +121,4 @@ Variable | Description
 - [ ] Dynamic or static options for seeds.
 - [ ] Dynamic or static options for analysis on split data.
 - [ ] Add functionality for analyzing multiple point of interests.
+- [ ] Add support functions to edit constants like sheetnames.
