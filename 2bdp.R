@@ -239,7 +239,7 @@ generatePanel=function(x,bdp,seed){
 create2BDPClass=function(data=NULL,
                          metadata=NULL,bdp=NULL,poi=NULL,sampleIDS=NULL,fileBasename=NULL,
                          featureNameMap=NULL,ifFeatureMap=T,validationMethod="all",
-                         seed=100,kfold=10,threads=round(detectCores()*.75),
+                         seed=100,kfold=10,threads=1,
                          totalPanels=2000,topPanels=200,trainSplitRatio=.7,rfDataSize=1,
                          amountOfFeatures=2:10,subGrouping=c("all","sw")[1],metric="Accuracy",
                          tuneGrid=NULL,tuneGridParms=2:20,
