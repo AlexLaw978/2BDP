@@ -217,6 +217,7 @@ generatePanel=function(x,bdp,seed){
   }else{
     keep = c("cutoff",names(diff_mean[1:as.integer(bdp$rfDataSize)]))
   }
+  keep=keep[!is.na(keep)]
   #keep = c("cutoff",names(diff_mean[1:(ncol(bdp$data)*bdp$rfDataSize-1)]))
   rf = train(cutoff ~., data = bdp$data[,keep],
              method="rf",metric=bdp$metric,
@@ -239,8 +240,8 @@ generatePanel=function(x,bdp,seed){
 create2BDPClass=function(data=NULL,
                          metadata=NULL,bdp=NULL,poi=NULL,sampleIDS=NULL,fileBasename=NULL,
                          featureNameMap=NULL,ifFeatureMap=T,validationMethod="all",
-                         seed=100,kfold=10,threads=1,
-                         totalPanels=2000,topPanels=200,trainSplitRatio=.7,rfDataSize=1,
+                         seed=100,kfold=10,threads=round(detectCores()*.75),
+                         totalPanels=2000,topPanels=200,trainSplitRatio=.7,rfDataSize=.5,
                          amountOfFeatures=2:10,subGrouping=c("all","sw")[1],metric="Accuracy",
                          tuneGrid=NULL,tuneGridParms=2:20,
                          trainControl=NULL,
