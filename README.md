@@ -17,10 +17,6 @@ install.packages("../TwoBDP_1.0.0.tar.gz",repos = NULL)
 library(TwoBDP)
 ```
 
-## 2BDP Operation Flow Chart
-
-![picture alt](https://github.com/AlexLaw978/2BDP/blob/main/images/2bdpFlowChart.png)
-
 ## How To Use
 
 1. Setup data table (df) <br />
