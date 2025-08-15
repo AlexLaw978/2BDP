@@ -1,0 +1,18 @@
+Package: TwoBDP
+Type: Package
+Title: Two Binomal Decision Point
+Version: 1.0.0
+Authors@R: c(
+    person(
+      "Alexander", "Lawrence",
+      email = "alexander.b.lawrence.ctr@health.mil",
+      role = c("aut", "cre")
+    )
+  )
+Description: The tool has 2 primary functions. 
+  1) identify top panel of features using random
+  2) Validate panels using a logistic regression model made of features identified from 1.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
